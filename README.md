@@ -1,97 +1,160 @@
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
+# 💰 Expense Tracker Mobile App
 
-# Getting Started
+> A production-grade, fintech-inspired personal finance management mobile application built with **React Native**, **TypeScript**, **Redux Toolkit**, and **Supabase** (PostgreSQL + Auth + RLS).
 
-> **Note**: Make sure you have completed the [Set Up Your Environment](https://reactnative.dev/docs/set-up-your-environment) guide before proceeding.
+Designed and structured as a high-standard portfolio project demonstrating scalable mobile architecture, clean state management, strong typing, and modern UI/UX principles.
 
-## Step 1: Start Metro
+---
 
-First, you will need to run **Metro**, the JavaScript build tool for React Native.
+## 📱 Features
 
-To start the Metro dev server, run the following command from the root of your React Native project:
+- **🔐 Secure Authentication**:
+  - Email & password sign-up and sign-in powered by **Supabase Auth**.
+  - Auto session restoration with token refresh and persistence.
+  - One-tap demo mode for instant reviewer evaluation.
+  - Comprehensive form validation and friendly error handling.
 
-```sh
-# Using npm
+- **📊 Intuitive Financial Dashboard**:
+  - Real-time **Total Balance**, **Income**, and **Expense** summary.
+  - Personalized dynamic greetings based on time of day.
+  - Quick action buttons to add transactions or browse transaction history.
+  - Recent transactions list with category styling and formatted currency (₹ INR).
+  - Pull-to-refresh data synchronisation.
+
+- **💳 Full Transaction CRUD**:
+  - Record income or expense with customizable categories.
+  - Predefined categorized icons and soft palettes for both Expense and Income.
+  - Date and optional description/notes.
+  - Edit existing transactions with prefilled fields.
+  - Delete transactions with native confirmation alert dialogs.
+
+- **🔍 Search & Filtering**:
+  - Live search by note, category, or amount.
+  - Segmented type filters: **All**, **Income**, and **Expense** with live counts.
+  - Transactions grouped chronologically by month.
+  - Empty states with call-to-action buttons.
+
+- **👤 Profile & Account Management**:
+  - User profile with initials avatar.
+  - Overview statistics (lifetime transactions count, net balance).
+  - Inline profile name editing.
+  - Backend connection status indicator (Supabase vs Offline mode).
+  - Secure logout with confirmation dialog.
+
+---
+
+## 🛠️ Tech Stack & Architecture
+
+| Layer | Technology | Purpose |
+|---|---|---|
+| **Mobile Framework** | React Native (0.87.1) | Android & iOS cross-platform native app |
+| **Language** | TypeScript (Strict) | Type safety, maintainability, and clean interfaces |
+| **State Management** | Redux Toolkit (`@reduxjs/toolkit`) | Centralized state slices (`authSlice`, `transactionSlice`) |
+| **Navigation** | React Navigation (`@react-navigation/native-stack`) | Native stack navigators with slide animations |
+| **Backend & Auth** | Supabase (PostgreSQL) | Authentication, Database, and Row Level Security (RLS) |
+| **Local Storage** | AsyncStorage | Session caching and offline fallback persistence |
+| **Design System** | Custom Vanilla StyleSheet | Modern fintech design system (tokens for colors, typography, spacing, shadows) |
+
+---
+
+## 📂 Project Structure
+
+```text
+ExpenseTracker/
+├── src/
+│   ├── components/         # Reusable UI component library
+│   │   ├── AmountCard.tsx         # Dashboard hero balance card
+│   │   ├── CategorySelector.tsx   # Category picker with badges & colors
+│   │   ├── CustomButton.tsx       # Standard button (variants, loading states)
+│   │   ├── CustomInput.tsx        # Styled input with errors & password toggle
+│   │   ├── EmptyState.tsx         # Graceful empty list placeholder
+│   │   ├── FilterButton.tsx       # Segmented All/Income/Expense filters
+│   │   ├── Header.tsx             # Unified screen header with navigation
+│   │   ├── Loader.tsx             # Polished activity indicators
+│   │   └── TransactionCard.tsx    # Single transaction row component
+│   ├── constants/          # Design system & configuration
+│   │   ├── categories.ts          # Predefined categories, icons & colors
+│   │   ├── colors.ts              # Fintech color palette
+│   │   ├── spacing.ts             # Spacing, radius & shadow tokens
+│   │   └── typography.ts          # Font sizes, weights & line heights
+│   ├── navigation/         # Navigation stacks
+│   │   ├── AuthNavigator.tsx      # Login & Register stack
+│   │   ├── MainNavigator.tsx      # Home, Transactions, Add, Details, Profile
+│   │   └── RootNavigator.tsx      # Auth session state gate
+│   ├── screens/            # Application screens
+│   │   ├── auth/                  # LoginScreen, RegisterScreen
+│   │   ├── home/                  # HomeScreen (Dashboard)
+│   │   ├── profile/               # ProfileScreen
+│   │   ├── splash/                # SplashScreen
+│   │   └── transactions/          # TransactionsScreen, AddTransactionScreen, TransactionDetailsScreen
+│   ├── services/           # Backend integration
+│   │   └── supabase.ts            # Supabase client & fallback detector
+│   ├── store/              # Redux Toolkit store & slices
+│   │   ├── hooks.ts               # Typed hooks (useAppDispatch, useAppSelector)
+│   │   ├── store.ts               # Store configuration
+│   │   └── slices/                # authSlice, transactionSlice
+│   ├── types/              # Domain & navigation TypeScript interfaces
+│   └── utils/              # Utilities & helpers
+│       ├── helpers.ts             # Currency formatter, date parser, groupings
+│       └── validation.ts          # Form validation rules
+├── supabase_schema.sql     # Database schema & RLS policies
+├── App.tsx                 # Root application wrapper
+└── package.json
+```
+
+---
+
+## ⚡ Getting Started
+
+### 1. Prerequisites
+- Node.js >= 22
+- Android Studio / Android SDK (for Android development)
+- Java 17+
+
+### 2. Installation
+```bash
+git clone https://github.com/Hemantdhote/ExpenseTrackerRN.git
+cd ExpenseTrackerRN
+npm install
+```
+
+### 3. Run the App
+```bash
+# Start Metro bundler
 npm start
 
-# OR using Yarn
-yarn start
-```
-
-## Step 2: Build and run your app
-
-With Metro running, open a new terminal window/pane from the root of your React Native project, and use one of the following commands to build and run your Android or iOS app:
-
-### Android
-
-```sh
-# Using npm
+# Run on Android device / emulator
 npm run android
-
-# OR using Yarn
-yarn android
 ```
 
-### iOS
+### 4. Supabase Setup (Optional for Live Backend)
+1. Create a free project on [Supabase](https://supabase.com).
+2. Go to **SQL Editor** in Supabase and run the SQL code from [`supabase_schema.sql`](./supabase_schema.sql).
+3. Update `src/services/supabase.ts` with your `url` and `anonKey`.
+*(Note: If Supabase is not configured, the app automatically switches to an in-memory/AsyncStorage demo mode with preloaded mock transactions for instant previewing!)*
 
-For iOS, remember to install CocoaPods dependencies (this only needs to be run on first clone or after updating native deps).
+---
 
-The first time you create a new project, run the Ruby bundler to install CocoaPods itself:
+## 🧪 Testing & Code Quality
 
-```sh
-bundle install
+```bash
+# Run ESLint
+npm run lint
+
+# Run TypeScript compilation check
+npx tsc --noEmit
+
+# Run Jest unit test suite
+npm test
 ```
 
-Then, and every time you update your native dependencies, run:
+---
 
-```sh
-bundle exec pod install
-```
+## 📄 Resume Description (Ready to Copy)
 
-For more information, please visit [CocoaPods Getting Started guide](https://guides.cocoapods.org/using/getting-started.html).
-
-```sh
-# Using npm
-npm run ios
-
-# OR using Yarn
-yarn ios
-```
-
-If everything is set up correctly, you should see your new app running in the Android Emulator, iOS Simulator, or your connected device.
-
-This is one way to run your app — you can also build it directly from Android Studio or Xcode.
-
-## Step 3: Modify your app
-
-Now that you have successfully run the app, let's make changes!
-
-Open `App.tsx` in your text editor of choice and make some changes. When you save, your app will automatically update and reflect these changes — this is powered by [Fast Refresh](https://reactnative.dev/docs/fast-refresh).
-
-When you want to forcefully reload, for example to reset the state of your app, you can perform a full reload:
-
-- **Android**: Press the <kbd>R</kbd> key twice or select **"Reload"** from the **Dev Menu**, accessed via <kbd>Ctrl</kbd> + <kbd>M</kbd> (Windows/Linux) or <kbd>Cmd ⌘</kbd> + <kbd>M</kbd> (macOS).
-- **iOS**: Press <kbd>R</kbd> in iOS Simulator.
-
-## Congratulations! :tada:
-
-You've successfully run and modified your React Native App. :partying_face:
-
-### Now what?
-
-- If you want to add this new React Native code to an existing application, check out the [Integration guide](https://reactnative.dev/docs/integration-with-existing-apps).
-- If you're curious to learn more about React Native, check out the [docs](https://reactnative.dev/docs/getting-started).
-
-# Troubleshooting
-
-If you're having issues getting the above steps to work, see the [Troubleshooting](https://reactnative.dev/docs/troubleshooting) page.
-
-# Learn More
-
-To learn more about React Native, take a look at the following resources:
-
-- [React Native Website](https://reactnative.dev) - learn more about React Native.
-- [Getting Started](https://reactnative.dev/docs/environment-setup) - an **overview** of React Native and how setup your environment.
-- [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
-- [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
-- [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
+> **Expense Tracker Mobile App — React Native, TypeScript, Redux Toolkit, Supabase**
+> - Architected a personal finance management mobile app featuring real-time transaction CRUD, monthly budget analytics, and category-based spending breakdowns.
+> - Integrated Supabase for user authentication, PostgreSQL database operations, and Row Level Security (RLS) ensuring strict per-user data isolation.
+> - Built a robust state management layer with Redux Toolkit and async thunks, including AsyncStorage caching for offline persistence and resilient fallback states.
+> - Developed a reusable UI component design system (inputs, buttons, cards, empty states, category pickers) adhering to strict accessibility and responsive layout principles.
+> - Implemented lightweight form validation, modular navigation with React Navigation 7, and automated unit tests with Jest.
