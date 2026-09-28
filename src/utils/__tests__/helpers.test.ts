@@ -10,7 +10,8 @@ describe('Helper Utilities', () => {
     });
 
     it('formats with sign when requested', () => {
-      expect(formatCurrency(40000, true)).toBe('+₹40,000');
+      expect(formatCurrency(40000, true, 'income')).toBe('+₹40,000');
+      expect(formatCurrency(450, true, 'expense')).toBe('-₹450');
       expect(formatCurrency(-450, true)).toBe('-₹450');
     });
   });

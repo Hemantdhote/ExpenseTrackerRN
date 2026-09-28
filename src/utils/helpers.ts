@@ -1,6 +1,10 @@
 import { Transaction } from '../types';
 
-export const formatCurrency = (amount: number, showSign = false): string => {
+export const formatCurrency = (
+  amount: number,
+  showSign = false,
+  type?: 'income' | 'expense'
+): string => {
   const absolute = Math.abs(amount);
   const formatted = new Intl.NumberFormat('en-IN', {
     maximumFractionDigits: 2,
@@ -8,7 +12,12 @@ export const formatCurrency = (amount: number, showSign = false): string => {
   }).format(absolute);
 
   if (showSign) {
-    const sign = amount >= 0 ? '+' : '-';
+    let sign = '+';
+    if (type) {
+      sign = type === 'income' ? '+' : '-';
+    } else {
+      sign = amount >= 0 ? '+' : '-';
+    }
     return `${sign}₹${formatted}`;
   }
   return `₹${formatted}`;

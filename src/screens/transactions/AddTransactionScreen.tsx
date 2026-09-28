@@ -9,6 +9,7 @@ import {
   TouchableOpacity,
   Alert,
 } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RouteProp } from '@react-navigation/native';
 import { MainStackParamList, TransactionType } from '../../types';
@@ -113,7 +114,7 @@ export const AddTransactionScreen: React.FC<AddTransactionScreenProps> = ({
   };
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container} edges={['top']}>
       <Header
         title={isEditing ? 'Edit Transaction' : 'Add Transaction'}
         showBack
@@ -230,7 +231,7 @@ export const AddTransactionScreen: React.FC<AddTransactionScreenProps> = ({
           />
         </ScrollView>
       </KeyboardAvoidingView>
-    </View>
+    </SafeAreaView>
   );
 };
 

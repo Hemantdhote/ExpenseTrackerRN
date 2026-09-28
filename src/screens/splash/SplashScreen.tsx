@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { View, Text, StyleSheet, ActivityIndicator } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { colors, fontSize, fontWeight, spacing } from '../../constants';
 import { useAppDispatch } from '../../store';
 import { checkSession } from '../../store/slices/authSlice';
@@ -17,7 +18,7 @@ export const SplashScreen: React.FC = () => {
   }, [dispatch]);
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container} edges={['top', 'bottom']}>
       <View style={styles.brandBox}>
         <View style={styles.logoCircle}>
           <Text style={styles.logoIcon}>₹</Text>
@@ -30,7 +31,7 @@ export const SplashScreen: React.FC = () => {
         <ActivityIndicator size="small" color={colors.primary} />
         <Text style={styles.loadingText}>Initializing...</Text>
       </View>
-    </View>
+    </SafeAreaView>
   );
 };
 

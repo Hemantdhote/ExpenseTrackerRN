@@ -59,7 +59,7 @@ export const TransactionCard: React.FC<TransactionCardProps> = ({
             isIncome ? styles.incomeText : styles.expenseText,
           ]}
         >
-          {formatCurrency(transaction.amount, true)}
+          {formatCurrency(transaction.amount, true, transaction.type)}
         </Text>
         <Text style={styles.typeLabel}>
           {isIncome ? 'Income' : 'Expense'}

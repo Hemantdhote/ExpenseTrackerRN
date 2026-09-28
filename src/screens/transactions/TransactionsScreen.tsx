@@ -8,6 +8,7 @@ import {
   TouchableOpacity,
   TextInput,
 } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RouteProp } from '@react-navigation/native';
 import { MainStackParamList, Transaction, TransactionFilter } from '../../types';
@@ -108,7 +109,7 @@ export const TransactionsScreen: React.FC<TransactionsScreenProps> = ({
   }, [filteredTransactions]);
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container} edges={['top']}>
       <Header
         title="Transactions"
         showBack
@@ -207,7 +208,7 @@ export const TransactionsScreen: React.FC<TransactionsScreenProps> = ({
           </View>
         )}
       />
-    </View>
+    </SafeAreaView>
   );
 };
 

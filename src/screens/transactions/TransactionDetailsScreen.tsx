@@ -6,6 +6,7 @@ import {
   ScrollView,
   Alert,
 } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RouteProp } from '@react-navigation/native';
 import { MainStackParamList } from '../../types';
@@ -43,7 +44,7 @@ export const TransactionDetailsScreen: React.FC<TransactionDetailsScreenProps> =
 
   if (!transaction) {
     return (
-      <View style={styles.container}>
+      <SafeAreaView style={styles.container} edges={['top']}>
         <Header title="Transaction" showBack onBack={() => navigation.goBack()} />
         <View style={styles.notFoundBox}>
           <Text style={styles.notFoundText}>Transaction not found</Text>
@@ -54,7 +55,7 @@ export const TransactionDetailsScreen: React.FC<TransactionDetailsScreenProps> =
             size="md"
           />
         </View>
-      </View>
+      </SafeAreaView>
     );
   }
 
@@ -90,7 +91,7 @@ export const TransactionDetailsScreen: React.FC<TransactionDetailsScreenProps> =
   };
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container} edges={['top']}>
       <Header
         title="Transaction Details"
         showBack
@@ -118,7 +119,7 @@ export const TransactionDetailsScreen: React.FC<TransactionDetailsScreenProps> =
               isIncome ? styles.incomeText : styles.expenseText,
             ]}
           >
-            {formatCurrency(transaction.amount, true)}
+            {formatCurrency(transaction.amount, true, transaction.type)}
           </Text>
 
           <View
@@ -192,7 +193,7 @@ export const TransactionDetailsScreen: React.FC<TransactionDetailsScreenProps> =
           />
         </View>
       </ScrollView>
-    </View>
+    </SafeAreaView>
   );
 };
 
