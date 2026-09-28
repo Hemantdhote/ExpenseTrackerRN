@@ -103,7 +103,7 @@ const styles = StyleSheet.create({
     letterSpacing: -0.5,
   },
   negativeBalance: {
-    color: colors.expenseBorder,
+    color: '#F87171',
   },
   divider: {
     height: 1,

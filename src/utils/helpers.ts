@@ -5,6 +5,7 @@ export const formatCurrency = (
   showSign = false,
   type?: 'income' | 'expense'
 ): string => {
+  const isNegative = amount < 0;
   const absolute = Math.abs(amount);
   const formatted = new Intl.NumberFormat('en-IN', {
     maximumFractionDigits: 2,
@@ -16,10 +17,15 @@ export const formatCurrency = (
     if (type) {
       sign = type === 'income' ? '+' : '-';
     } else {
-      sign = amount >= 0 ? '+' : '-';
+      sign = isNegative ? '-' : '+';
     }
     return `${sign}₹${formatted}`;
   }
+
+  if (isNegative) {
+    return `-₹${formatted}`;
+  }
+
   return `₹${formatted}`;
 };
 

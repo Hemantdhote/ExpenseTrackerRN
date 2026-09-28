@@ -9,6 +9,11 @@ describe('Helper Utilities', () => {
       expect(formatCurrency(40000)).toBe('₹40,000');
     });
 
+    it('formats negative amounts with minus sign', () => {
+      expect(formatCurrency(-5000)).toBe('-₹5,000');
+      expect(formatCurrency(-250)).toBe('-₹250');
+    });
+
     it('formats with sign when requested', () => {
       expect(formatCurrency(40000, true, 'income')).toBe('+₹40,000');
       expect(formatCurrency(450, true, 'expense')).toBe('-₹450');
@@ -49,6 +54,33 @@ describe('Helper Utilities', () => {
       expect(summary.totalIncome).toBe(40000);
       expect(summary.totalExpense).toBe(14500);
       expect(summary.totalBalance).toBe(25500);
+    });
+
+    it('calculates negative totalBalance when expenses exceed income', () => {
+      const mockTransactions: Transaction[] = [
+        {
+          id: '1',
+          user_id: 'user1',
+          type: 'income',
+          amount: 5000,
+          category: 'Salary',
+          date: '2026-09-28',
+        },
+        {
+          id: '2',
+          user_id: 'user1',
+          type: 'expense',
+          amount: 8000,
+          category: 'Food',
+          date: '2026-09-28',
+        },
+      ];
+
+      const summary = calculateSummary(mockTransactions);
+      expect(summary.totalIncome).toBe(5000);
+      expect(summary.totalExpense).toBe(8000);
+      expect(summary.totalBalance).toBe(-3000);
+      expect(formatCurrency(summary.totalBalance)).toBe('-₹3,000');
     });
   });
 
