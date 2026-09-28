@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
+import { ArrowDownLeft, ArrowUpRight } from 'lucide-react-native';
 import { colors, fontSize, fontWeight, radius, spacing, shadows } from '../constants';
 import { formatCurrency } from '../utils/helpers';
 
@@ -41,7 +42,7 @@ export const AmountCard: React.FC<AmountCardProps> = ({
         <View style={styles.statItem}>
           <View style={styles.statHeader}>
             <View style={[styles.arrowCircle, styles.incomeCircle]}>
-              <Text style={styles.arrowIcon}>↓</Text>
+              <ArrowDownLeft size={14} color="#34D399" strokeWidth={2.5} />
             </View>
             <Text style={styles.statLabel}>Income</Text>
           </View>
@@ -56,7 +57,7 @@ export const AmountCard: React.FC<AmountCardProps> = ({
         <View style={styles.statItem}>
           <View style={styles.statHeader}>
             <View style={[styles.arrowCircle, styles.expenseCircle]}>
-              <Text style={styles.arrowIcon}>↑</Text>
+              <ArrowUpRight size={14} color="#F87171" strokeWidth={2.5} />
             </View>
             <Text style={styles.statLabel}>Expenses</Text>
           </View>

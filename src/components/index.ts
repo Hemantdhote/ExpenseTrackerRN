@@ -7,3 +7,5 @@ export * from './EmptyState';
 export * from './FilterButton';
 export * from './Header';
 export * from './Loader';
+export * from './CategoryIcon';
+export * from './AppIcon';

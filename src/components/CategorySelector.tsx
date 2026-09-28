@@ -3,6 +3,7 @@ import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import { EXPENSE_CATEGORIES, INCOME_CATEGORIES, CategoryConfig } from '../constants/categories';
 import { colors, fontSize, fontWeight, radius, spacing } from '../constants';
 import { TransactionType } from '../types';
+import { CategoryIcon } from './CategoryIcon';
 
 interface CategorySelectorProps {
   type: TransactionType;
@@ -47,7 +48,12 @@ export const CategorySelector: React.FC<CategorySelectorProps> = ({
                     : { backgroundColor: cat.bgColor },
                 ]}
               >
-                <Text style={styles.iconText}>{cat.icon}</Text>
+                <CategoryIcon
+                  category={cat.name}
+                  type={type}
+                  size={20}
+                  color={cat.color}
+                />
               </View>
               <Text
                 style={[

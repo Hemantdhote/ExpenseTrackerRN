@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import { ArrowLeft } from 'lucide-react-native';
 import { colors, fontSize, fontWeight, radius, spacing } from '../constants';
 
 interface HeaderProps {
@@ -27,7 +28,7 @@ export const Header: React.FC<HeaderProps> = ({
             hitSlop={{ top: 12, bottom: 12, left: 12, right: 12 }}
             style={styles.backButton}
           >
-            <Text style={styles.backArrow}>←</Text>
+            <ArrowLeft size={20} color={colors.textPrimary} strokeWidth={2.2} />
           </TouchableOpacity>
         ) : null}
         <View style={styles.titleWrap}>

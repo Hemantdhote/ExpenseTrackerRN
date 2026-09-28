@@ -11,6 +11,7 @@ import {
   TextStyle,
 } from 'react-native';
 import { colors, fontSize, fontWeight, radius, spacing } from '../constants';
+import { Eye, EyeOff } from 'lucide-react-native';
 
 interface CustomInputProps {
   label?: string;
@@ -98,9 +99,11 @@ export const CustomInput: React.FC<CustomInputProps> = ({
             hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
             style={styles.eyeButton}
           >
-            <Text style={styles.eyeText}>
-              {isPasswordVisible ? 'Hide' : 'Show'}
-            </Text>
+            {isPasswordVisible ? (
+              <EyeOff size={20} color={colors.textSecondary} strokeWidth={2} />
+            ) : (
+              <Eye size={20} color={colors.textSecondary} strokeWidth={2} />
+            )}
           </TouchableOpacity>
         ) : rightElement ? (
           <View style={styles.rightElementContainer}>{rightElement}</View>

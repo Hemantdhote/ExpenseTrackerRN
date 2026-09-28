@@ -12,7 +12,7 @@ import { RouteProp } from '@react-navigation/native';
 import { MainStackParamList } from '../../types';
 import { colors, fontSize, fontWeight, radius, spacing } from '../../constants';
 import { getCategoryByName } from '../../constants/categories';
-import { Header, CustomButton } from '../../components';
+import { Header, CustomButton, CategoryIcon } from '../../components';
 import { formatCurrency, formatDate } from '../../utils/helpers';
 import { useAppDispatch, useAppSelector } from '../../store';
 import { deleteTransaction } from '../../store/slices/transactionSlice';
@@ -110,7 +110,12 @@ export const TransactionDetailsScreen: React.FC<TransactionDetailsScreenProps> =
               { backgroundColor: categoryConfig.bgColor },
             ]}
           >
-            <Text style={styles.iconText}>{categoryConfig.icon}</Text>
+            <CategoryIcon
+              category={transaction.category}
+              type={transaction.type}
+              size={32}
+              color={categoryConfig.color}
+            />
           </View>
 
           <Text

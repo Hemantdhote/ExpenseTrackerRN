@@ -1,10 +1,11 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
+import { CreditCard } from 'lucide-react-native';
 import { colors, fontSize, fontWeight, spacing } from '../constants';
 import { CustomButton } from './CustomButton';
 
 interface EmptyStateProps {
-  icon?: string;
+  icon?: React.ReactNode | string;
   title: string;
   description?: string;
   actionTitle?: string;
@@ -12,17 +13,25 @@ interface EmptyStateProps {
 }
 
 export const EmptyState: React.FC<EmptyStateProps> = ({
-  icon = '💳',
+  icon,
   title = 'No Transactions Yet',
   description = 'Start tracking your expenses by adding your first transaction',
   actionTitle,
   onAction,
 }) => {
+  const renderIcon = () => {
+    if (!icon) {
+      return <CreditCard size={32} color={colors.primary} strokeWidth={2} />;
+    }
+    if (typeof icon === 'string') {
+      return <Text style={styles.iconText}>{icon}</Text>;
+    }
+    return icon;
+  };
+
   return (
     <View style={styles.container}>
-      <View style={styles.iconCircle}>
-        <Text style={styles.iconText}>{icon}</Text>
-      </View>
+      <View style={styles.iconCircle}>{renderIcon()}</View>
       <Text style={styles.title}>{title}</Text>
       {description ? <Text style={styles.description}>{description}</Text> : null}
       {actionTitle && onAction ? (

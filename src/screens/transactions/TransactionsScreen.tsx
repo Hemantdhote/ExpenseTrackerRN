@@ -9,6 +9,7 @@ import {
   TextInput,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { Search, X, CreditCard } from 'lucide-react-native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RouteProp } from '@react-navigation/native';
 import { MainStackParamList, Transaction, TransactionFilter } from '../../types';
@@ -128,7 +129,7 @@ export const TransactionsScreen: React.FC<TransactionsScreenProps> = ({
       <View style={styles.filterSection}>
         {/* Search Input */}
         <View style={styles.searchBar}>
-          <Text style={styles.searchIcon}>🔍</Text>
+          <Search size={18} color={colors.textMuted} strokeWidth={2.2} style={styles.searchIcon} />
           <TextInput
             value={searchQuery}
             onChangeText={setSearchQuery}
@@ -142,7 +143,7 @@ export const TransactionsScreen: React.FC<TransactionsScreenProps> = ({
               onPress={() => setSearchQuery('')}
               hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
             >
-              <Text style={styles.clearSearch}>✕</Text>
+              <X size={16} color={colors.textMuted} strokeWidth={2.2} />
             </TouchableOpacity>
           ) : null}
         </View>
@@ -170,7 +171,13 @@ export const TransactionsScreen: React.FC<TransactionsScreenProps> = ({
         }
         ListEmptyComponent={
           <EmptyState
-            icon={searchQuery ? '🔎' : '💳'}
+            icon={
+              searchQuery ? (
+                <Search size={32} color={colors.textSecondary} strokeWidth={2} />
+              ) : (
+                <CreditCard size={32} color={colors.primary} strokeWidth={2} />
+              )
+            }
             title={searchQuery ? 'No Results Found' : 'No Transactions Found'}
             description={
               searchQuery

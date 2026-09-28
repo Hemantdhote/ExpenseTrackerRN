@@ -4,6 +4,7 @@ import { Transaction } from '../types';
 import { getCategoryByName } from '../constants/categories';
 import { colors, fontSize, fontWeight, radius, spacing, shadows } from '../constants';
 import { formatCurrency, formatDate } from '../utils/helpers';
+import { CategoryIcon } from './CategoryIcon';
 
 interface TransactionCardProps {
   transaction: Transaction;
@@ -39,7 +40,12 @@ export const TransactionCard: React.FC<TransactionCardProps> = ({
             { backgroundColor: categoryConfig.bgColor },
           ]}
         >
-          <Text style={styles.iconText}>{categoryConfig.icon}</Text>
+          <CategoryIcon
+            category={transaction.category}
+            type={transaction.type}
+            size={22}
+            color={categoryConfig.color}
+          />
         </View>
 
         <View style={styles.infoContainer}>

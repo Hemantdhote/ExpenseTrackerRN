@@ -8,6 +8,7 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { Plus, BarChart3 } from 'lucide-react-native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { MainStackParamList } from '../../types';
 import { colors, fontSize, fontWeight, radius, spacing } from '../../constants';
@@ -102,7 +103,7 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
             style={[styles.actionBtn, styles.primaryActionBtn]}
           >
             <View style={styles.actionIconCircle}>
-              <Text style={styles.actionPlusIcon}>+</Text>
+              <Plus size={16} color="#FFFFFF" strokeWidth={2.8} />
             </View>
             <Text style={styles.primaryActionText}>Add Transaction</Text>
           </TouchableOpacity>
@@ -112,7 +113,7 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
             onPress={() => navigation.navigate('Transactions')}
             style={[styles.actionBtn, styles.secondaryActionBtn]}
           >
-            <Text style={styles.actionHistoryIcon}>📊</Text>
+            <BarChart3 size={18} color={colors.primary} strokeWidth={2.2} style={styles.actionHistoryIcon} />
             <Text style={styles.secondaryActionText}>History</Text>
           </TouchableOpacity>
         </View>
